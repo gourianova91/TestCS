@@ -6,13 +6,20 @@ namespace ShapeCS
     {
         abstract class Shape
         {
+            public string type = "Shape";
             public abstract void move(int x, int y);
             public abstract void scale(int scaleF);
             public abstract void rotate(float angle);
+            public abstract void create_shape(string type, int x = 0, int y = 0, float radius = 1);
         }
         class Circle : Shape
         {
-            public float getRadius { get; set; }
+            private float radius;
+            public float getRadius 
+            { 
+                get { return radius; }
+                set { radius = value; }
+            }
             public Circle(float radius) 
             {
                 getRadius = radius;
@@ -30,10 +37,19 @@ namespace ShapeCS
             {
                 Console.WriteLine($"Circle is rotated to {angle}°");
             }
+            public override void create_shape(string type, int x = 0, int y = 0, float radius = 1)
+            {
+                Console.WriteLine($"{type} with radius {radius} is created!");
+            }
         }
         class Square : Shape 
         {
-            public int getX { get; set; }
+            private int x;
+            public int getX 
+            { 
+                get { return x; }
+                set { x = value; }
+            }
             public Square(int x) 
             {
                 getX = x;
@@ -51,11 +67,25 @@ namespace ShapeCS
             {
                 Console.WriteLine($"Square is rotated to {angle}°");
             }
+            public override void create_shape(string type, int x = 0, int y = 0, float radius = 1)
+            {
+                Console.WriteLine($"{type} with x = {x} is created!");
+            }
         }
         class Rectangle : Shape
         {
-            public int getX { get; set; }
-            public int getY {get; set; }
+            private int x;
+            private int y;
+            public int getX 
+            { 
+                get { return x; }
+                set { x = value; }
+            }
+            public int getY 
+            {
+                get { return y; } 
+                set { y = value; } 
+            }
             public Rectangle(int x, int y)
             {
                 getX = x;
@@ -74,6 +104,10 @@ namespace ShapeCS
             {
                 Console.WriteLine($"Rectangle is rotated to {angle}°");
             }
+            public override void create_shape(string type, int x = 0, int y = 0, float radius = 1)
+            {
+                Console.WriteLine($"{type} with x = {x} and y = {y} is created!");
+            }
         }
         static void Main(string[] args)
         {
@@ -81,12 +115,15 @@ namespace ShapeCS
             Shape circle = new Circle(3);
             shape = circle;
             shape.move(0, 0);
+            shape.create_shape("Circle", radius: 3);
             Shape rectangle = new Rectangle(5, 10);
             shape = rectangle;
             shape.move(0, 0);
+            shape.create_shape("Rectangle", x: 5, y: 10);
             Shape square = new Square(5);
             shape = square;
             shape.move(0, 0);
+            shape.create_shape("Square", x: 5);
         }
     }
 }
