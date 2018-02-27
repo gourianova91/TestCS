@@ -6,7 +6,6 @@ namespace ShapeCS
     {
         abstract class Shape
         {
-            public string type = "Shape";
             public abstract void move(int x, int y);
             public abstract void scale(int scaleF);
             public abstract void rotate(float angle);
@@ -20,10 +19,9 @@ namespace ShapeCS
                 get { return radius; }
                 set { radius = value; }
             }
-            public Circle(float radius) 
+            public Circle() 
             {
-                getRadius = radius;
-                Console.WriteLine($"Circle's radius = {radius}");
+                Console.WriteLine($"This is a circle");
             }
             public override void move(int x, int y)
             {
@@ -50,10 +48,9 @@ namespace ShapeCS
                 get { return x; }
                 set { x = value; }
             }
-            public Square(int x) 
+            public Square() 
             {
-                getX = x;
-                Console.WriteLine($"Square's side = {x}");
+                Console.WriteLine($"This is a square!");
             }
             public override void move(int x, int y)
             {
@@ -86,11 +83,9 @@ namespace ShapeCS
                 get { return y; } 
                 set { y = value; } 
             }
-            public Rectangle(int x, int y)
+            public Rectangle()
             {
-                getX = x;
-                getY = y;
-                Console.WriteLine($"Rectangle's sides are {x}, {y}");
+                Console.WriteLine($"This is a rectangle!");
             }
             public override void move(int x, int y)
             {
@@ -111,19 +106,19 @@ namespace ShapeCS
         }
         static void Main(string[] args)
         {
-            Shape shape;
-            Shape circle = new Circle(3);
-            shape = circle;
-            shape.move(0, 0);
-            shape.create_shape("Circle", radius: 3);
-            Shape rectangle = new Rectangle(5, 10);
-            shape = rectangle;
-            shape.move(0, 0);
-            shape.create_shape("Rectangle", x: 5, y: 10);
-            Shape square = new Square(5);
-            shape = square;
-            shape.move(0, 0);
-            shape.create_shape("Square", x: 5);
+            Circle circle = new Circle();
+            circle.getRadius  = 3;
+            circle.move(0, 0);
+            circle.create_shape("Circle", radius: circle.getRadius);
+            Rectangle rectangle = new Rectangle();
+            rectangle.getX = 5;
+            rectangle.getY = 10;
+            rectangle.move(0, 0);
+            rectangle.create_shape("Rectangle", x: rectangle.getX, y: rectangle.getY);
+            Square square = new Square();
+            square.getX = 5;
+            square.move(0, 0);
+            square.create_shape("Square", x: square.getX);
         }
     }
 }
