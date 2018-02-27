@@ -77,20 +77,16 @@ namespace ShapeCS
         }
         static void Main(string[] args)
         {
-            Circle circle = new Circle(3);
-            circle.move(2, 2);
-            circle.scale(5);
-            circle.rotate(30);
-            Console.WriteLine();
-            Rectangle rectangle = new Rectangle(5, 10);
-            rectangle.move(1, 3);
-            rectangle.scale(10);
-            rectangle.rotate(45);
-            Console.WriteLine();
-            Square square = new Square(5);
-            square.move(1, 6);
-            square.scale(6);
-            square.rotate(12.2f);
+            Shape shape;
+            Shape circle = new Circle(3);
+            shape = circle;
+            shape.move(0, 0);
+            Shape rectangle = new Rectangle(5, 10);
+            shape = rectangle;
+            shape.move(0, 0);
+            Shape square = new Square(5);
+            shape = square;
+            shape.move(0, 0);
         }
     }
 }
