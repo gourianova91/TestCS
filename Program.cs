@@ -9,19 +9,12 @@ namespace ShapeCS
             public abstract void move(int x, int y);
             public abstract void scale(int scaleF);
             public abstract void rotate(float angle);
-            public abstract void create_shape(string type, int x = 0, int y = 0, float radius = 1);
         }
         class Circle : Shape
         {
-            private float radius;
-            public float getRadius 
-            { 
-                get { return radius; }
-                set { radius = value; }
-            }
-            public Circle() 
+            public Circle()
             {
-                Console.WriteLine($"This is a circle");
+                Console.WriteLine("Circle is created");
             }
             public override void move(int x, int y)
             {
@@ -35,22 +28,12 @@ namespace ShapeCS
             {
                 Console.WriteLine($"Circle is rotated to {angle}°");
             }
-            public override void create_shape(string type, int x = 0, int y = 0, float radius = 1)
-            {
-                Console.WriteLine($"{type} with radius {radius} is created!");
-            }
         }
         class Square : Shape 
         {
-            private int x;
-            public int getX 
-            { 
-                get { return x; }
-                set { x = value; }
-            }
-            public Square() 
+            public Square()
             {
-                Console.WriteLine($"This is a square!");
+                Console.WriteLine("Square is created");
             }
             public override void move(int x, int y)
             {
@@ -64,28 +47,12 @@ namespace ShapeCS
             {
                 Console.WriteLine($"Square is rotated to {angle}°");
             }
-            public override void create_shape(string type, int x = 0, int y = 0, float radius = 1)
-            {
-                Console.WriteLine($"{type} with x = {x} is created!");
-            }
         }
         class Rectangle : Shape
         {
-            private int x;
-            private int y;
-            public int getX 
-            { 
-                get { return x; }
-                set { x = value; }
-            }
-            public int getY 
-            {
-                get { return y; } 
-                set { y = value; } 
-            }
             public Rectangle()
             {
-                Console.WriteLine($"This is a rectangle!");
+                Console.WriteLine("Rectangle is created");
             }
             public override void move(int x, int y)
             {
@@ -99,26 +66,43 @@ namespace ShapeCS
             {
                 Console.WriteLine($"Rectangle is rotated to {angle}°");
             }
-            public override void create_shape(string type, int x = 0, int y = 0, float radius = 1)
+        }
+        abstract class Creator
+        {
+            // factory method
+            public abstract Shape create_shape();
+        }
+        class CircleCreator : Creator
+        {
+            public override Shape create_shape()
             {
-                Console.WriteLine($"{type} with x = {x} and y = {y} is created!");
+                return new Circle();
+            }
+        }
+        class SquareCreator : Creator
+        {
+            public override Shape create_shape()
+            {
+                return new Square();
+            }
+        }
+        class RectangleCreator : Creator
+        { 
+            public override Shape create_shape()
+            {
+                return new Rectangle();
             }
         }
         static void Main(string[] args)
         {
-            Circle circle = new Circle();
-            circle.getRadius  = 3;
-            circle.move(0, 0);
-            circle.create_shape("Circle", radius: circle.getRadius);
-            Rectangle rectangle = new Rectangle();
-            rectangle.getX = 5;
-            rectangle.getY = 10;
-            rectangle.move(0, 0);
-            rectangle.create_shape("Rectangle", x: rectangle.getX, y: rectangle.getY);
-            Square square = new Square();
-            square.getX = 5;
-            square.move(0, 0);
-            square.create_shape("Square", x: square.getX);
+            Creator creator = new CircleCreator();
+            Shape shape1 = creator.create_shape();
+
+            creator = new SquareCreator();
+            Shape shape2 = creator.create_shape();
+
+            creator = new RectangleCreator();
+            Shape shape3 = creator.create_shape();
         }
     }
 }
